@@ -2,8 +2,9 @@ var common = {
 	registry : {
 		type : 'com.alibaba.dubbo.config.RegistryConfig',
 		fields : {
-			protocol : 'multicast',
-			address : '224.5.6.7:87'
+			protocol : 'zookeeper',
+			address : '127.0.0.1:2181',
+			client : 'zkclient'
 		}
 	}
 }
