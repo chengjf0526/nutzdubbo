@@ -2,7 +2,7 @@
  * 
  */
 var provider = {
-	application : {
+	provider.application : {
 		type : 'com.alibaba.dubbo.config.ApplicationConfig',
 		fields : {
 			name : 'provider'
@@ -12,7 +12,7 @@ var provider = {
 		type : 'com.alibaba.dubbo.config.ProtocolConfig',
 		fields : {
 			name : 'dubbo',
-			port : 9999,
+			port : 9090,
 			threads : 200
 		}
 	},
@@ -24,7 +24,7 @@ var provider = {
 		type : 'com.alibaba.dubbo.config.ServiceConfig',
 		fields : {
 			application : {
-				refer : 'application'
+				refer : 'provider.application'
 			},
 			registry : {
 				refer : 'registry'
