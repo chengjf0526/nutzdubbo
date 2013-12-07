@@ -1,37 +1,42 @@
+/*
+ * 
+ */
 var provider = {
 	application : {
-		type : 'com.alibaba.dubbo.rpc.config.ApplicationConfig',
-		name : 'ABC'
-	},
-	registry : {
-		type : 'com.alibaba.dubbo.rpc.config.RegistryConfig',
-		address : '10.20.130.230:9090',
-		username : 'aaa',
-		password : 'bbb'
+		type : 'com.alibaba.dubbo.config.ApplicationConfig',
+		fields : {
+			name : 'provider'
+		}
 	},
 	protocol : {
 		type : 'com.alibaba.dubbo.config.ProtocolConfig',
-		name : 'dubbo',
-		port : 12345,
-		threads : 200
+		fields : {
+			name : 'dubbo',
+			port : 9999,
+			threads : 200
+		}
 	},
 	impl : {
-		type : 'com.sunivo.nutzdubbo.services.IPetService',
+		type : 'com.sunivo.nutzdubbo.services.impl.PetServiceImpl',
+		fields : {}
 	},
 	service : {
-		type : 'com.alibaba.dubbo.rpc.config.ServiceConfig',
-		application : {
-			refer : 'application'
-		},
-		registry : {
-			refer : 'registry'
-		},
-		protocol : {
-			refer : 'protocol'
-		},
-		ref : {
-			refer : 'impl'
-		},
-		version : '1.0.0'
+		type : 'com.alibaba.dubbo.config.ServiceConfig',
+		fields : {
+			application : {
+				refer : 'application'
+			},
+			registry : {
+				refer : 'registry'
+			},
+			protocol : {
+				refer : 'protocol'
+			},
+			interfaceName : 'com.sunivo.nutzdubbo.services.IPetService',
+			ref : {
+				refer : 'impl'
+			},
+			version : '1.0.0'
+		}
 	}
 }

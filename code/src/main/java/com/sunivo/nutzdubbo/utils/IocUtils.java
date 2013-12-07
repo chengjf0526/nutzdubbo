@@ -33,10 +33,12 @@ public interface IocUtils {
     /**
      * 服务提供者IOC
      */
-    Ioc2 PROVIDER_ICO = new NutIoc(new JsonLoader("provider/provider.js"));
+    Ioc2 PROVIDER_ICO = new NutIoc(new JsonLoader("common/common.js",
+            "provider/provider.js"));
 
     /**
      * 服务消费者IOC
      */
-    Ioc2 CONSUMER_ICO = new NutIoc(new JsonLoader("consumer/consumer.js"));
+    Ioc2 CONSUMER_ICO = new NutIoc(new JsonLoader("common/common.js",
+            "consumer/consumer.js"));
 }
