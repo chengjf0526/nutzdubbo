@@ -9,10 +9,13 @@ public class Server {
         Thread providerThread = new Thread() {
             @SuppressWarnings("rawtypes")
             public void run() {
-                ServiceConfig service = PROVIDER_ICO.get(null, "service");
-                service.export();
-                ServiceConfig myService = PROVIDER_ICO.get(null, "myService");
-                myService.export();
+                String[] names = PROVIDER_ICO.getNames();
+                for (String name : names) {
+                    if (name.startsWith("service.")) {
+                        ServiceConfig service = PROVIDER_ICO.get(null, name);
+                        service.export();
+                    }
+                }
             }
         };
         providerThread.start();

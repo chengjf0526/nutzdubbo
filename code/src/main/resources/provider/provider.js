@@ -30,7 +30,7 @@ var provider = {
 			}
 		}
 	},
-	service : {
+	service.1 : {
 		parent : 'baseService',
 		fields : {
 			interfaceName : 'com.sunivo.nutzdubbo.services.IPetService',
@@ -40,7 +40,7 @@ var provider = {
 			version : '1.0.0'
 		}
 	},
-	myService : {
+	service.2 : {
 		parent : 'baseService',
 		fields : {
 			interfaceName : 'com.sunivo.nutzdubbo.services.IPetService',
