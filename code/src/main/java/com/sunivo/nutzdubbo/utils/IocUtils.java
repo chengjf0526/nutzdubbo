@@ -6,6 +6,7 @@ package com.sunivo.nutzdubbo.utils;
 import org.nutz.ioc.Ioc2;
 import org.nutz.ioc.impl.NutIoc;
 import org.nutz.ioc.loader.annotation.AnnotationIocLoader;
+import org.nutz.ioc.loader.combo.ComboIocLoader;
 import org.nutz.ioc.loader.json.JsonLoader;
 
 /**
@@ -33,8 +34,9 @@ public interface IocUtils {
     /**
      * 服务提供者IOC
      */
-    Ioc2 PROVIDER_ICO = new NutIoc(new JsonLoader("common/common.js",
-            "provider/provider.js"));
+    Ioc2 PROVIDER_ICO = new NutIoc(new ComboIocLoader(new AnnotationIocLoader(
+            "com.sunivo.nutzdubbo.services"), new JsonLoader(
+            "common/common.js", "provider/provider.js")));
 
     /**
      * 服务消费者IOC

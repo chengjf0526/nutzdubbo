@@ -3,11 +3,11 @@
  */
 package com.sunivo.nutzdubbo.services.impl;
 
+import static com.sunivo.nutzdubbo.utils.IocUtils.BEANS_IOC;
+
 import java.util.Calendar;
 
 import org.nutz.ioc.loader.annotation.IocBean;
-
-import static com.sunivo.nutzdubbo.utils.IocUtils.*;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.sunivo.nutzdubbo.beans.Pet;

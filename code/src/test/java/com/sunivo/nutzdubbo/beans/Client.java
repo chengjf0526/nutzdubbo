@@ -15,7 +15,7 @@ public class Client {
         ReferenceConfig<IPetService> reference = CONSUMER_ICO.get(null,
                 "reference");
         // 设置不同版本号，可以调用不同版本的实现
-        reference.setVersion("1.0.0");
+        reference.setVersion("1.0.1");
         IPetService petService = reference.get();
         Pet pet = petService.createPet();
         System.out.println(Json.toJson(pet));

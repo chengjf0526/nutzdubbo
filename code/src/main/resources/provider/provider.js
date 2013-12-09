@@ -16,15 +16,7 @@ var provider = {
 			threads : 200
 		}
 	},
-	impl : {
-		type : 'com.sunivo.nutzdubbo.services.impl.PetServiceImpl',
-		fields : {}
-	},
-	myImpl : {
-		type : 'com.sunivo.nutzdubbo.services.impl.MyPetServiceImpl',
-		fields : {}
-	},
-	service : {
+	baseService :{
 		type : 'com.alibaba.dubbo.config.ServiceConfig',
 		fields : {
 			application : {
@@ -35,29 +27,25 @@ var provider = {
 			},
 			protocol : {
 				refer : 'protocol'
-			},
+			}
+		}
+	},
+	service : {
+		parent : 'baseService',
+		fields : {
 			interfaceName : 'com.sunivo.nutzdubbo.services.IPetService',
 			ref : {
-				refer : 'impl'
+				refer:'petService'
 			},
 			version : '1.0.0'
 		}
 	},
 	myService : {
-		type : 'com.alibaba.dubbo.config.ServiceConfig',
+		parent : 'baseService',
 		fields : {
-			application : {
-				refer : 'provider.application'
-			},
-			registry : {
-				refer : 'registry'
-			},
-			protocol : {
-				refer : 'protocol'
-			},
 			interfaceName : 'com.sunivo.nutzdubbo.services.IPetService',
 			ref : {
-				refer : 'myImpl'
+				refer : 'myPetService'
 			},
 			version : '1.0.1'
 		}
