@@ -14,21 +14,7 @@ var consumer = {
 			registry : {
 				refer : 'registry',
 			}
-			interfaceName : 'com.sunivo.nutzdubbo.services.IPetService',
-			version : '1.0.0'
-		}
-	},
-	myReference :{
-		type :'com.alibaba.dubbo.config.ReferenceConfig',
-		fields :{
-			application : {
-				refer : 'consumer.application'
-			},
-			registry : {
-				refer : 'registry',
-			}
-			interfaceName : 'com.sunivo.nutzdubbo.services.IPetService',
-			version : '1.0.1'
+			interfaceName : 'com.sunivo.nutzdubbo.services.IPetService'
 		}
 	}
 }
