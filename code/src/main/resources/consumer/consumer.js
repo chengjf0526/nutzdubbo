@@ -7,6 +7,7 @@ var consumer = {
 	},
 	reference :{
 		type :'com.alibaba.dubbo.config.ReferenceConfig',
+		singleton : false,
 		fields :{
 			application : {
 				refer : 'consumer.application'
@@ -14,7 +15,6 @@ var consumer = {
 			registry : {
 				refer : 'registry',
 			}
-			interfaceName : 'com.sunivo.nutzdubbo.services.IPetService'
 		}
 	}
 }

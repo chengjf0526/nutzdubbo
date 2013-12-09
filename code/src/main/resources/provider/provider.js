@@ -49,5 +49,15 @@ var provider = {
 			},
 			version : '1.0.1'
 		}
+	},
+	service.3 : {
+		parent : 'baseService',
+		fields : {
+			interfaceName : 'com.sunivo.nutzdubbo.services.IHelloService',
+			ref : {
+				refer : 'helloService'
+			},
+			version : '1.0.0'
+		}
 	}
 }
