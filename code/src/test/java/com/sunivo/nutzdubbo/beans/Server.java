@@ -13,6 +13,9 @@ public class Server {
                 ServiceConfig<IPetService> service = PROVIDER_ICO.get(null,
                         "service");
                 service.export();
+                ServiceConfig<IPetService> myService = PROVIDER_ICO.get(null,
+                        "myService");
+                myService.export();
             }
         };
         providerThread.start();

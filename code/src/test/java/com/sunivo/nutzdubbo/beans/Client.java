@@ -26,6 +26,17 @@ public class Client {
                 calendar.set(Calendar.YEAR, 2014);
                 pet = petService.createPet("手工设置名字", calendar);
                 System.out.println(Json.toJson(pet));
+                ReferenceConfig<IPetService> myReference = CONSUMER_ICO.get(
+                        null, "myReference");
+                petService = myReference.get();
+                pet = petService.createPet();
+                System.out.println(Json.toJson(pet));
+                pet = petService.createPet("手工设置名字");
+                System.out.println(Json.toJson(pet));
+                calendar = Calendar.getInstance();
+                calendar.set(Calendar.YEAR, 2014);
+                pet = petService.createPet("手工设置名字", calendar);
+                System.out.println(Json.toJson(pet));
             }
         };
         consumerThread.start();
