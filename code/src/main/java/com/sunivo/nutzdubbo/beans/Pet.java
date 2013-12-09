@@ -1,5 +1,6 @@
 package com.sunivo.nutzdubbo.beans;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 import org.nutz.ioc.loader.annotation.Inject;
@@ -14,7 +15,12 @@ import org.nutz.ioc.loader.annotation.IocBean;
  */
 // 当name为类名首字母小写，则可以不写name属性
 @IocBean(name = "pet", singleton = false)
-public class Pet {
+public class Pet implements Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
     @Inject("defaultName")
     private String name;
