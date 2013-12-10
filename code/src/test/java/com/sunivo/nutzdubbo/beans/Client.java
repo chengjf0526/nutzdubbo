@@ -14,8 +14,8 @@ public class Client {
         {
             // 设置不同版本号，可以调用不同版本的实现
             {
-                IPetService petService = (IPetService) ServiceFactory
-                        .getService(IPetService.class, "1.0.0");
+                IPetService petService = ServiceFactory.getService(
+                        IPetService.class, "1.0.0");
                 Pet pet = petService.createPet();
                 System.out.println(Json.toJson(pet));
                 pet = petService.createPet("手工设置名字");
@@ -26,8 +26,8 @@ public class Client {
                 System.out.println(Json.toJson(pet));
             }
             {
-                IPetService petService = (IPetService) ServiceFactory
-                        .getService(IPetService.class, "1.0.1");
+                IPetService petService = ServiceFactory.getService(
+                        IPetService.class, "1.0.1");
                 Pet pet = petService.createPet();
                 System.out.println(Json.toJson(pet));
                 pet = petService.createPet("手工设置名字");
@@ -39,8 +39,8 @@ public class Client {
             }
         }
         {
-            IHelloService helloService = (IHelloService) ServiceFactory
-                    .getService(IHelloService.class, "1.0.0");
+            IHelloService helloService = ServiceFactory.getService(
+                    IHelloService.class, "1.0.0");
             System.out.println(helloService.sayHello("chengjianfang"));
         }
     }

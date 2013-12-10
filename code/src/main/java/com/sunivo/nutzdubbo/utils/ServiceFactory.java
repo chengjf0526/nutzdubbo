@@ -28,18 +28,19 @@ public final class ServiceFactory {
      * @return 服务对象
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    public static final Object getService(Class<?> clazz, String version) {
+    public static final <T> T getService(Class<? extends T> clazz,
+            String version) {
         final String key = clazz.getName() + "." + version;
-        Object service = SERVICES.get(key);
+        T service = (T) SERVICES.get(key);
         if (null == service) {
             synchronized (clazz) {
-                service = SERVICES.get(key);
+                service = (T) SERVICES.get(key);
                 if (null == service) {
                     ReferenceConfig reference = CONSUMER_ICO.get(null,
                             "reference");
                     reference.setInterface(clazz);
                     reference.setVersion(version);
-                    service = reference.get();
+                    service = (T) reference.get();
                     SERVICES.put(key, service);
                 }
             }
