@@ -16,6 +16,9 @@ import com.alibaba.dubbo.config.ReferenceConfig;
  *         2013年12月9日 下午9:52:25
  */
 public final class ServiceFactory {
+    /**
+     * 服务对象集合
+     */
     private static final Map<String, Object> SERVICES = new HashMap<String, Object>();
 
     /**
