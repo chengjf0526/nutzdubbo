@@ -17,9 +17,10 @@ import com.alibaba.dubbo.config.ReferenceConfig;
  */
 public final class ServiceFactory {
     /**
-     * 服务对象集合
+     * 服务配置对象集合
      */
-    private static final Map<String, Object> SERVICES = new HashMap<String, Object>();
+    @SuppressWarnings("rawtypes")
+    private static final Map<String, ReferenceConfig> SERVICES = new HashMap<String, ReferenceConfig>();
 
     /**
      * 获取服务对象
@@ -34,20 +35,18 @@ public final class ServiceFactory {
     public static final <T> T getService(Class<? extends T> clazz,
             String version) {
         final String key = clazz.getName() + "." + version;
-        T service = (T) SERVICES.get(key);
-        if (null == service) {
+        ReferenceConfig reference = SERVICES.get(key);
+        if (null == reference) {
             synchronized (clazz) {
-                service = (T) SERVICES.get(key);
-                if (null == service) {
-                    ReferenceConfig reference = CONSUMER_ICO.get(null,
-                            "reference");
+                reference = SERVICES.get(key);
+                if (null == reference) {
+                    reference = CONSUMER_ICO.get(null, "reference");
                     reference.setInterface(clazz);
                     reference.setVersion(version);
-                    service = (T) reference.get();
-                    SERVICES.put(key, service);
+                    SERVICES.put(key, reference);
                 }
             }
         }
-        return service;
+        return (T) reference.get();
     }
 }

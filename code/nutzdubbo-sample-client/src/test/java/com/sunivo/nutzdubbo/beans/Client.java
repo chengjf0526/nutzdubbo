@@ -11,7 +11,7 @@ import com.sunivo.nutzdubbo.utils.ServiceFactory;
 public class Client {
 
     public static void main(String[] args) {
-        for (int index = 1; index < 10; index++) {
+        for (int index = 0; index < 10; index++) {
             // 设置不同版本号，可以调用不同版本的实现
             {
                 IPetService petService = ServiceFactory.getService(
