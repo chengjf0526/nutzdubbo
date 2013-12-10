@@ -18,10 +18,4 @@ public interface IocUtils {
      */
     Ioc2 BEANS_IOC = new NutIoc(new AnnotationIocLoader(
             "com.sunivo.nutzdubbo.beans"));
-
-    /**
-     * SERVICE IOC
-     */
-    Ioc2 SERVICE_IOC = new NutIoc(new AnnotationIocLoader(
-            "com.sunivo.nutzdubbo.services"));
 }
