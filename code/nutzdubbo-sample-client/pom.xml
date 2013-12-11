@@ -56,6 +56,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.sunivo</groupId>
+			<artifactId>message-center-interfaces</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sunivo</groupId>
 			<artifactId>nutzdubbo-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

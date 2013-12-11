@@ -24,7 +24,8 @@ public interface ProviderIocUtils extends IocUtils {
      * 服务提供者IOC
      */
     Ioc2 PROVIDER_ICO = new NutIoc(new ComboIocLoader(new AnnotationIocLoader(
-            "com.sunivo.nutzdubbo.services"), new JsonLoader(
+            "com.sunivo.nutzdubbo.services",
+            "com.sunivo.messagecenter.services"), new JsonLoader(
             "common/common.js", "provider/provider.js", "service")));
 
 }
