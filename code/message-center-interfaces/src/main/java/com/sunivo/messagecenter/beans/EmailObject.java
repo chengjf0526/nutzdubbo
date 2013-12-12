@@ -5,8 +5,6 @@ package com.sunivo.messagecenter.beans;
 
 import java.io.Serializable;
 
-import jodd.mail.EmailAttachment;
-
 /**
  * @author chengjianfang@sunivo.com
  * 
@@ -51,7 +49,7 @@ public final class EmailObject implements Serializable {
     /**
      * 邮件附件内容
      */
-    private EmailAttachment[] attachments;
+    private SunivoEmailAttachment[] attachments;
 
     /**
      * @return the from
@@ -61,7 +59,8 @@ public final class EmailObject implements Serializable {
     }
 
     /**
-     * @param from the from to set
+     * @param from
+     *            the from to set
      */
     public void setFrom(String from) {
         this.from = from;
@@ -75,9 +74,10 @@ public final class EmailObject implements Serializable {
     }
 
     /**
-     * @param tos the tos to set
+     * @param tos
+     *            the tos to set
      */
-    public void setTos(String[] tos) {
+    public void setTos(String... tos) {
         this.tos = tos;
     }
 
@@ -89,9 +89,10 @@ public final class EmailObject implements Serializable {
     }
 
     /**
-     * @param ccs the ccs to set
+     * @param ccs
+     *            the ccs to set
      */
-    public void setCcs(String[] ccs) {
+    public void setCcs(String... ccs) {
         this.ccs = ccs;
     }
 
@@ -103,9 +104,10 @@ public final class EmailObject implements Serializable {
     }
 
     /**
-     * @param bccs the bccs to set
+     * @param bccs
+     *            the bccs to set
      */
-    public void setBccs(String[] bccs) {
+    public void setBccs(String... bccs) {
         this.bccs = bccs;
     }
 
@@ -117,7 +119,8 @@ public final class EmailObject implements Serializable {
     }
 
     /**
-     * @param subject the subject to set
+     * @param subject
+     *            the subject to set
      */
     public void setSubject(String subject) {
         this.subject = subject;
@@ -131,23 +134,25 @@ public final class EmailObject implements Serializable {
     }
 
     /**
-     * @param messages the messages to set
+     * @param messages
+     *            the messages to set
      */
-    public void setMessages(Message[] messages) {
+    public void setMessages(Message... messages) {
         this.messages = messages;
     }
 
     /**
      * @return the attachments
      */
-    public EmailAttachment[] getAttachments() {
+    public SunivoEmailAttachment[] getAttachments() {
         return attachments;
     }
 
     /**
-     * @param attachments the attachments to set
+     * @param attachments
+     *            the attachments to set
      */
-    public void setAttachments(EmailAttachment[] attachments) {
+    public void setAttachments(SunivoEmailAttachment... attachments) {
         this.attachments = attachments;
     }
 }

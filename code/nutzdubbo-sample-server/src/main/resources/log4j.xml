@@ -4,13 +4,12 @@
 	<!-- 输出到控制台中 -->
 	<appender name="console" class="org.apache.log4j.ConsoleAppender">
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern"
-				value="%-5p %-d{yyyy-MM-dd HH:mm:ss} [%c.%M(%L)] - %m%n" />
+			<param name="ConversionPattern" value="%-5p %-d{yyyy-MM-dd HH:mm:ss} [%c.%M(%L)] - %m%n" />
 		</layout>
 	</appender>
 	<!-- 设置接收所有输出的通道 -->
 	<root>
-		<level value="INFO" />
+		<level value="DEBUG" />
 		<appender-ref ref="console" />
 	</root>
 </log4j:configuration>
