@@ -2,7 +2,7 @@
  * 
  */
 var service = {
-	service.1 : {
+	service.sample.1 : {
 		parent : 'baseService',
 		fields : {
 			interfaceName : 'com.sunivo.nutzdubbo.services.IPetService',
@@ -12,7 +12,7 @@ var service = {
 			version : '1.0.0'
 		}
 	},
-	service.2 : {
+	service.sample.2 : {
 		parent : 'baseService',
 		fields : {
 			interfaceName : 'com.sunivo.nutzdubbo.services.IPetService',
@@ -22,7 +22,7 @@ var service = {
 			version : '1.0.1'
 		}
 	},
-	service.3 : {
+	service.sample.3 : {
 		parent : 'baseService',
 		fields : {
 			interfaceName : 'com.sunivo.nutzdubbo.services.IHelloService',

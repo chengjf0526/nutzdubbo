@@ -1,5 +1,6 @@
 package com.sunivo.nutzdubbo.beans;
 
+import java.io.File;
 import java.util.Calendar;
 
 import jodd.util.MimeTypes;
@@ -8,6 +9,7 @@ import org.nutz.json.Json;
 
 import com.sunivo.messagecenter.beans.EmailObject;
 import com.sunivo.messagecenter.beans.Message;
+import com.sunivo.messagecenter.beans.SunivoEmailAttachment;
 import com.sunivo.messagecenter.services.IEmailSendService;
 import com.sunivo.nutzdubbo.services.IHelloService;
 import com.sunivo.nutzdubbo.services.IPetService;
@@ -16,13 +18,13 @@ import com.sunivo.nutzdubbo.utils.ServiceFactory;
 public class Client {
 
     public static void main(String[] args) {
-        // for (int index = 0; index < 10; index++) {
-        // 设置不同版本号，可以调用不同版本的实现
-        // createPet100(index);
-        // createPet101(index);
-        // sayHello100(index);
-        sendMail100(0);
-        // }
+        for (int index = 0; index < 10; index++) {
+            // 设置不同版本号，可以调用不同版本的实现
+            createPet100(index);
+            createPet101(index);
+            sayHello100(index);
+            sendMail100(index);
+        }
     }
 
     /**
@@ -32,8 +34,8 @@ public class Client {
         IEmailSendService emailSendService = ServiceFactory.getService(
                 IEmailSendService.class, "1.0.0");
         EmailObject emailObject = new EmailObject();
-        emailObject.setFrom("chengjianfang@sunivo.com");
-        emailObject.setTos(new String[] { "chengjf0526@gmail.com" });
+        emailObject.setFrom("chengjf0526@163.com");
+        emailObject.setTos("chengjf0526@gmail.com");
         // emailObject.setCcs(new String[] { "wlzhongguo@gmail.com" });
         emailObject.setSubject("测试nutz+dubbo做ws调用，jodd做邮件发送，第【" + (index + 1)
                 + "】封");
@@ -44,7 +46,11 @@ public class Client {
         htmlMessage
                 .setContent("<br><center><h1>文章标题</h1><div>纯粹测试</div></center>");
         htmlMessage.setMimeType(MimeTypes.MIME_TEXT_HTML);
-        emailObject.setMessages(new Message[] { textMessage, htmlMessage });
+        emailObject.setMessages(textMessage, htmlMessage);
+        SunivoEmailAttachment attachment = new SunivoEmailAttachment(
+                "出差申请(20130218-20130331).png", "B001", new File(
+                        "D:/TD/出差申请(20130218-20130331).png"));
+        emailObject.setAttachments(attachment);
         String result = emailSendService.sendEmail(emailObject);
         if (null != result) {
             System.out.println("唯一标识为:" + result);
