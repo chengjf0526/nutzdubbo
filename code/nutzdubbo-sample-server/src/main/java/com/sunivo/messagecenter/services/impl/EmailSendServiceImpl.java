@@ -6,7 +6,9 @@ package com.sunivo.messagecenter.services.impl;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.concurrent.BlockingQueue;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import javax.activation.DataSource;
@@ -47,9 +49,9 @@ public class EmailSendServiceImpl implements IEmailSendService {
             .getLogger(EmailSendServiceImpl.class);
 
     /**
-     * 待发邮件列表
+     * 待发邮件列表(双向队列，如果有急需发送的邮件，可以直接放在队列头)
      */
-    private static final BlockingQueue<EmailObject> EMAIL_OBJECT_QUEUE = new LinkedBlockingDeque<EmailObject>();
+    private static final BlockingDeque<EmailObject> EMAIL_OBJECT_QUEUE = new LinkedBlockingDeque<EmailObject>();
 
     static {
         new Thread() {
@@ -59,15 +61,29 @@ public class EmailSendServiceImpl implements IEmailSendService {
                         SendMailSession session = null;
                         EmailObject emailObject = EMAIL_OBJECT_QUEUE.take();
                         if (null != emailObject) {
+                            List<EmailObject> tmpEmailObjectList = new ArrayList<EmailObject>();
+                            // 取不多于10个
+                            tmpEmailObjectList.add(emailObject);
+                            for (int index = 0; index < 10; index++) {
+                                // 获取邮件对象，如果不存在则结束获取
+                                try {
+                                    emailObject = EMAIL_OBJECT_QUEUE.remove();
+                                    tmpEmailObjectList.add(emailObject);
+                                } catch (Exception ex) {
+                                    break;
+                                }
+                            }
                             try {
                                 LOGGER.debug("开始构建会话");
                                 session = buildSession();
                                 LOGGER.debug("打开会话");
                                 session.open();
-                                LOGGER.debug("开始构建邮件");
-                                Email email = buildEmail(emailObject);
-                                LOGGER.debug("发送邮件");
-                                session.sendMail(email);
+                                for (EmailObject tmpEmailObject : tmpEmailObjectList) {
+                                    LOGGER.debug("开始构建邮件");
+                                    Email email = buildEmail(tmpEmailObject);
+                                    LOGGER.debug("发送邮件");
+                                    session.sendMail(email);
+                                }
                             } catch (Exception ex) {
                                 LOGGER.error(ex.getMessage(), ex);
                             } finally {
@@ -78,6 +94,7 @@ public class EmailSendServiceImpl implements IEmailSendService {
                                 session = null;
                             }
                         }
+                        sleep(10000);
                     } catch (Exception ex) {
                         LOGGER.debug("暂停失败", ex);
                     }
@@ -172,7 +189,14 @@ public class EmailSendServiceImpl implements IEmailSendService {
 
     public String sendEmail(EmailObject emailObject) {
         try {
-            EMAIL_OBJECT_QUEUE.put(emailObject);
+            // 如果优先发送，将消息放在队列头
+            if (emailObject.isFirstSend()) {
+                EMAIL_OBJECT_QUEUE.offerFirst(emailObject);
+            }
+            // 如果不优先发送，正常放置于队列尾
+            else {
+                EMAIL_OBJECT_QUEUE.offer(emailObject);
+            }
             return "唯一标识";
         } catch (Exception ex) {
             LOGGER.error("放入邮件队列失败", ex);

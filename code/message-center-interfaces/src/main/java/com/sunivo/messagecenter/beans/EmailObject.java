@@ -52,6 +52,11 @@ public final class EmailObject implements Serializable {
     private SunivoEmailAttachment[] attachments;
 
     /**
+     * 邮件发送
+     */
+    private boolean firstSend;
+
+    /**
      * @return the from
      */
     public String getFrom() {
@@ -154,5 +159,24 @@ public final class EmailObject implements Serializable {
      */
     public void setAttachments(SunivoEmailAttachment... attachments) {
         this.attachments = attachments;
+    }
+
+    /**
+     * 是否优先发送
+     * 
+     * @return 优先发送
+     */
+    public boolean isFirstSend() {
+        return firstSend;
+    }
+
+    /**
+     * 设置优先发送
+     * 
+     * @param 优先发送
+     *            优先发送
+     */
+    public void setFirstSend(boolean firstSend) {
+        this.firstSend = firstSend;
     }
 }
