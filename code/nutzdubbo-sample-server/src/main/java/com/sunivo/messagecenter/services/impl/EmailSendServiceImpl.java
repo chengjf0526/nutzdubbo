@@ -3,16 +3,13 @@
  */
 package com.sunivo.messagecenter.services.impl;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.mail.util.ByteArrayDataSource;
 
 import jodd.mail.Email;
@@ -21,6 +18,7 @@ import jodd.mail.SendMailSession;
 import jodd.mail.SimpleAuthenticator;
 import jodd.mail.SmtpServer;
 import jodd.mail.att.DataSourceAttachment;
+import jodd.util.MimeTypes;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -33,6 +31,7 @@ import com.sunivo.messagecenter.beans.EmailObject;
 import com.sunivo.messagecenter.beans.Message;
 import com.sunivo.messagecenter.beans.SunivoEmailAttachment;
 import com.sunivo.messagecenter.services.IEmailSendService;
+import com.sunivo.messagecenter.utils.ByteConver;
 
 /**
  * @author chengjianfang@sunivo.com
@@ -117,29 +116,26 @@ public class EmailSendServiceImpl implements IEmailSendService {
              * 
              * @param emailAttachment
              * @return
-             * @throws IOException
+             * @throws Exception
              */
             public DataSource buildDataSource(
-                    SunivoEmailAttachment emailAttachment) throws IOException {
-                byte[] content = emailAttachment.getContent();
-                InputStream inputStream = emailAttachment.getInputStream();
-                File file = emailAttachment.getFile();
+                    SunivoEmailAttachment emailAttachment) throws Exception {
+                byte[] content = ByteConver.reConver(emailAttachment
+                        .getContent());
                 String contentType = emailAttachment.getContentType();
                 if (null == contentType) {
-                    return new FileDataSource(file);
+                    return new ByteArrayDataSource(content,
+                            MimeTypes.MIME_APPLICATION_OCTET_STREAM);
                 } else {
-                    if (null == content) {
-                        return new ByteArrayDataSource(inputStream, contentType);
-                    } else {
-                        return new ByteArrayDataSource(content, contentType);
-                    }
+                    return new ByteArrayDataSource(content, contentType);
                 }
             }
 
             /**
              * @param emailObject
+             * @throws Exception
              */
-            private Email buildEmail(EmailObject emailObject) {
+            private Email buildEmail(EmailObject emailObject) throws Exception {
                 Email email = Email.create();
                 String from = emailObject.getFrom();
                 if (StringUtils.isNotEmpty(from)) {
