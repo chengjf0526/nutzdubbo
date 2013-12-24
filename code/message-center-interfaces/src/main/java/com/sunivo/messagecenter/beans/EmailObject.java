@@ -19,22 +19,22 @@ public final class EmailObject implements Serializable {
     /**
      * 邮件发送者
      */
-    private String from;
+    private SimpleEmailAddress from;
 
     /**
      * 邮件接受者
      */
-    private String[] tos;
+    private SimpleEmailAddress[] tos;
 
     /**
      * 邮件抄送接受者
      */
-    private String[] ccs;
+    private SimpleEmailAddress[] ccs;
 
     /**
      * 邮件密送接受者
      */
-    private String[] bccs;
+    private SimpleEmailAddress[] bccs;
 
     /**
      * 邮件标题
@@ -59,7 +59,7 @@ public final class EmailObject implements Serializable {
     /**
      * @return the from
      */
-    public String getFrom() {
+    public SimpleEmailAddress getFrom() {
         return from;
     }
 
@@ -67,14 +67,14 @@ public final class EmailObject implements Serializable {
      * @param from
      *            the from to set
      */
-    public void setFrom(String from) {
+    public void setFrom(SimpleEmailAddress from) {
         this.from = from;
     }
 
     /**
      * @return the tos
      */
-    public String[] getTos() {
+    public SimpleEmailAddress[] getTos() {
         return tos;
     }
 
@@ -82,14 +82,14 @@ public final class EmailObject implements Serializable {
      * @param tos
      *            the tos to set
      */
-    public void setTos(String... tos) {
+    public void setTos(SimpleEmailAddress... tos) {
         this.tos = tos;
     }
 
     /**
      * @return the ccs
      */
-    public String[] getCcs() {
+    public SimpleEmailAddress[] getCcs() {
         return ccs;
     }
 
@@ -97,14 +97,14 @@ public final class EmailObject implements Serializable {
      * @param ccs
      *            the ccs to set
      */
-    public void setCcs(String... ccs) {
+    public void setCcs(SimpleEmailAddress... ccs) {
         this.ccs = ccs;
     }
 
     /**
      * @return the bccs
      */
-    public String[] getBccs() {
+    public SimpleEmailAddress[] getBccs() {
         return bccs;
     }
 
@@ -112,7 +112,7 @@ public final class EmailObject implements Serializable {
      * @param bccs
      *            the bccs to set
      */
-    public void setBccs(String... bccs) {
+    public void setBccs(SimpleEmailAddress... bccs) {
         this.bccs = bccs;
     }
 

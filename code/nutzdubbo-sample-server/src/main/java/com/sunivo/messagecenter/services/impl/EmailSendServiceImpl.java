@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.sunivo.messagecenter.beans.EmailObject;
 import com.sunivo.messagecenter.beans.Message;
+import com.sunivo.messagecenter.beans.SimpleEmailAddress;
 import com.sunivo.messagecenter.beans.SunivoEmailAttachment;
 import com.sunivo.messagecenter.services.IEmailSendService;
 import com.sunivo.messagecenter.utils.ByteConver;
@@ -137,22 +138,16 @@ public class EmailSendServiceImpl implements IEmailSendService {
              */
             private Email buildEmail(EmailObject emailObject) throws Exception {
                 Email email = Email.create();
-                String from = emailObject.getFrom();
-                if (StringUtils.isNotEmpty(from)) {
-                    email.setFrom(from);
+                SimpleEmailAddress from = emailObject.getFrom();
+                if (null != from) {
+                    email.setFrom(from.toString());
                 }
-                String[] tos = emailObject.getTos();
-                if (ArrayUtils.isNotEmpty(tos)) {
-                    email.setTo(tos);
-                }
-                String[] ccs = emailObject.getCcs();
-                if (ArrayUtils.isNotEmpty(ccs)) {
-                    email.setCc(ccs);
-                }
-                String[] bccs = emailObject.getBccs();
-                if (ArrayUtils.isNotEmpty(bccs)) {
-                    email.setBcc(bccs);
-                }
+                email.setTo(simpleEmailAddressArray2StringArray(emailObject
+                        .getTos()));
+                email.setCc(simpleEmailAddressArray2StringArray(emailObject
+                        .getCcs()));
+                email.setBcc(simpleEmailAddressArray2StringArray(emailObject
+                        .getBccs()));
                 String subject = emailObject.getSubject();
                 if (StringUtils.isNotEmpty(subject)) {
                     email.setSubject(subject);
@@ -179,6 +174,26 @@ public class EmailSendServiceImpl implements IEmailSendService {
                     }
                 }
                 return email;
+            }
+
+            /**
+             * 将SimpleEmailAddress列表转换为字符串列表
+             * 
+             * @param simpleEmailAddresses
+             *            SimpleEmailAddress列表
+             * @return 字符串列表<li>null if simpleEmailAddresses is null or empty
+             */
+            private String[] simpleEmailAddressArray2StringArray(
+                    SimpleEmailAddress[] simpleEmailAddresses) {
+                String[] strings = null;
+                if (ArrayUtils.isNotEmpty(simpleEmailAddresses)) {
+                    int simpleEmailAddressesLen = simpleEmailAddresses.length;
+                    strings = new String[simpleEmailAddressesLen];
+                    for (int index = 0; index < simpleEmailAddressesLen; index++) {
+                        strings[index] = simpleEmailAddresses[index].toString();
+                    }
+                }
+                return strings;
             }
         }.start();
     }

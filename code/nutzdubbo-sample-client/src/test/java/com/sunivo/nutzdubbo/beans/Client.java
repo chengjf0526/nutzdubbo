@@ -10,6 +10,7 @@ import org.nutz.json.Json;
 
 import com.sunivo.messagecenter.beans.EmailObject;
 import com.sunivo.messagecenter.beans.Message;
+import com.sunivo.messagecenter.beans.SimpleEmailAddress;
 import com.sunivo.messagecenter.beans.SunivoEmailAttachment;
 import com.sunivo.messagecenter.services.IEmailSendService;
 import com.sunivo.messagecenter.utils.ByteConver;
@@ -37,8 +38,10 @@ public class Client {
         IEmailSendService emailSendService = ServiceFactory.getService(
                 IEmailSendService.class, "1.0.0");
         EmailObject emailObject = new EmailObject();
-        emailObject.setFrom("\"chengjianfang\" <chengjf0526@163.com>");
-        emailObject.setTos("\"chengjianfang\" <chengjf0526@gmail.com>");
+        emailObject
+                .setFrom(new SimpleEmailAddress("程建芳", "chengjf0526@163.com"));
+        emailObject.setTos(new SimpleEmailAddress("程建芳",
+                "chengjf0526@gmail.com"));
         // emailObject.setCcs(new String[] { "wlzhongguo@gmail.com" });
         emailObject.setSubject("测试nutz+dubbo做ws调用，jodd做邮件发送，第【" + (index + 1)
                 + "】封");
