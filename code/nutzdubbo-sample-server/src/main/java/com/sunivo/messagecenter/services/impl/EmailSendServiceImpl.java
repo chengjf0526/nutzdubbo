@@ -108,8 +108,8 @@ public class EmailSendServiceImpl implements IEmailSendService {
              */
             private SendMailSession buildSession() {
                 SmtpServer server = new SmtpServer("smtp.163.com", 25,
-                        new SimpleAuthenticator("chengjf0526@163.com",
-                                "chengjf0526@"));
+                        new SimpleAuthenticator("USER@163.com",
+                                "PASSWORD"));
                 SendMailSession session = server.createSession();
                 return session;
             }
