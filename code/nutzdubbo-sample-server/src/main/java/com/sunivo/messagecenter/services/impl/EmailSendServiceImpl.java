@@ -23,6 +23,7 @@ import jodd.util.MimeTypes;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.nutz.ioc.loader.annotation.IocBean;
+import org.nutz.json.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,6 +80,7 @@ public class EmailSendServiceImpl implements IEmailSendService {
                                 LOGGER.debug("打开会话");
                                 session.open();
                                 for (EmailObject tmpEmailObject : tmpEmailObjectList) {
+                                    LOGGER.info(Json.toJson(tmpEmailObject));
                                     LOGGER.debug("开始构建邮件");
                                     Email email = buildEmail(tmpEmailObject);
                                     LOGGER.debug("发送邮件");
